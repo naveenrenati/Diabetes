@@ -177,62 +177,84 @@
 		<!-- diabetes prediction -->
 		<div class="container predict-form" id="predict">
 			<form action="/predict" method="POST">
-				<p class="h2 text-center diabetes  ">Diabetes Predictor</p>
+				<p class="h2 text-center diabetes">Diabetes Predictor</p>
 				<div class="row">
-					
 					<div class="col-6">
 						<label for="InputPregnancies" class="form-label">Number of Pregnancies</label>
-						<input type="number" required class="form-control" id="InputPregnancies" name="Pregnancies" min="0"  placeholder="eg. 1">
-					  
+						<input type="number" required class="form-control" id="InputPregnancies" name="Pregnancies" min="0" placeholder="eg. 1">
 					</div>
 					<div class="col-6">
 						<label for="InputGlucose" class="form-label">Glucose (mg/dL)</label>
-                          <input type="number" required class="form-control" id="InputGlucose" name="Glucose"   placeholder="eg. 90">
-                        
+						<input type="number" required class="form-control" id="InputGlucose" name="Glucose" placeholder="eg. 90">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-6">
 						<label for="InputBloodPressure" class="form-label">Blood Pressure (mmHg)</label>
-						<input type="number" required class="form-control" id="InputBloodPressure" name="BloodPressure"   placeholder="eg. 80">
-					 
-
+						<input type="number" required class="form-control" id="InputBloodPressure" name="BloodPressure" placeholder="eg. 80">
 					</div>
 					<div class="col-6">
 						<label for="InputSkinThickness" class="form-label">Skin Thickness (mm)</label>
-						<input type="number" required class="form-control" id="InputSkinThickness" name="SkinThickness"   placeholder="eg. 20">
-					  
+						<input type="number" required class="form-control" id="InputSkinThickness" name="SkinThickness" placeholder="eg. 20">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-6">
 						<label for="InputInsulinLevel" class="form-label">Insulin Level (IU/mL)</label>
-						<input type="number" required class="form-control" id="InputInsulinLevel" name="InsulinLevel"   placeholder="eg. 100">
-					  
+						<input type="number" required class="form-control" id="InputInsulinLevel" name="InsulinLevel" placeholder="eg. 100">
 					</div>
 					<div class="col-6">
-						<label for="InputBodyMassIndex" class="form-label">Body Mass Index (kg/m²)</label>
-						<input type="number" required class="form-control" id="InputBodyMassIndex" name="BodyMassIndex"   step="0.1" placeholder="eg. 29.6">
-					  
+						<label for="InputWeight" class="form-label">Weight (kg)</label>
+						<input type="number" required class="form-control" id="InputWeight" name="Weight" placeholder="eg. 65">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<label for="InputBodyMassIndex" class="form-label">Body Mass Index (BMI)</label>
+						<input type="number" required class="form-control" id="InputBodyMassIndex" name="BodyMassIndex" step="0.1" readonly>
+					</div>
+					<div class="col-6">
+						<label for="InputHeight" class="form-label">Height (m)</label>
+						<input type="number" required class="form-control" id="InputHeight" name="Height" step="0.01" placeholder="eg. 1.75">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-6">
 						<label for="InputDiabetesPedigreeFunction" class="form-label">Diabetes Pedigree Function</label>
 						<input type="number" required class="form-control" id="InputDiabetesPedigreeFunction" name="DiabetesPedigreeFunction" min="0.1" max="3" step="0.001" placeholder="eg. 0.52">
-					 
 					</div>
 					<div class="col-6">
 						<label for="InputAge" class="form-label">Age</label>
-						<input type="number" required class="form-control" id="InputAge" name="Age" min="0"  placeholder="eg. 25">
-					  
+						<input type="number" required class="form-control" id="InputAge" name="Age" min="0" placeholder="eg. 25">
 					</div>
 				</div>
 				<div class="d-grid gap-2">
 					<button type="submit" class="btn btn-success shadow submit-btn">Predict</button>
-				  </div>
+				</div>
 			</form>
 		</div>
+		
+		<script>
+			// Get input elements
+			const weightInput = document.getElementById('InputWeight');
+			const heightInput = document.getElementById('InputHeight');
+			const bmiInput = document.getElementById('InputBodyMassIndex');
+		
+			// Function to calculate BMI
+			function calculateBMI() {
+				const weight = weightInput.value;
+				const height = heightInput.value;
+				if (weight > 0 && height > 0) {
+					const bmi = weight / (height * height);
+					bmiInput.value = bmi.toFixed(1); // Round to one decimal place
+				}
+			}
+		
+			// Event listeners for input fields
+			weightInput.addEventListener('input', calculateBMI);
+			heightInput.addEventListener('input', calculateBMI);
+		</script>
+		
 
 		<!-- diabetes prediction code ends  -->
 		
